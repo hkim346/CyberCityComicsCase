@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <title>Cyber City Comics</title>
+  
+</head>
+
+<body>
+<div id = "main">
+  <h3>Cyber City Comic</h3>
+  <h1 style="font-style: italic;">A webcomic of romance, sarcasm, math, and language.</h1>
+</div>
+
+<div id = "nav">
+  <button class = "buttons" type = "button" onclick = "window.location.href='/1'">|<</button>
+  <button class = "buttons" type = "button" onclick = "window.location.href={{data.num}}-1">Prev</button>
+  <button class = "buttons" type = "button" onclick = "window.location.href= '/random'">Random</button>
+  <button class = "buttons" type = "button" onclick = "window.location.href={{data.num}}+1">Next</button>
+  <button class = "buttons" type = "button" onclick = "window.location.href='/'">>|</button>
+</div>
+
+<div id = "cartoon">
+  <p style="font-size: 36px; font-weight:bold">{{data.title}}</p>
+  <p style="font-size: 16px; text-align:right"> Created on {{data.month}} / {{data.day}} / {{data.year}} <br> (MM/DD/YYYY)</p>
+  <img src = "{{data.img}}" alt = "{{data.alt}}">
+  <p id = "transcript">{{data.transcript}}</p>
+</div>
+
+</body>
+
+
+<script>
+    window.onload = function(){ 
+      var div = document.getElementById("transcript");
+      var str = div.textContent;
+      var n_str = str.replace("/n", "<br>");
+      div.innerText = n_str;
+    }
+</script>

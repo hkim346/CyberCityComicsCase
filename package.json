@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "xkcd-api": "^1.0.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "ccc_case",
+  "version": "1.0.0",
+  "description": "studyCase",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "Hyunjung Kim",
+  "license": "ISC"
+}
