@@ -32,12 +32,6 @@ app.get("/:num", function(req, res){
     var id = req.params.num;
     var max = 2535;
     
-    // var max = 0;
-    // xkcd.latest(function(error, response) {
-    //     max = parseInt(response.num);
-    //     console.log(max);
-    // });
-   
     if (id > max){
         xkcd.latest(function(error, response) {
         res.redirect(response.num);
