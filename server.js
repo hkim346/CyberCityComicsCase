@@ -6,7 +6,7 @@ const exphbs = require('express-handlebars');
 
 // for xkcd API
 var xkcd = require('xkcd-api'); 
-
+const { callbackify } = require('util');
 
 var HTTP_PORT = process.env.PORT || 8080;
 function onHttpStart(){
@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/random", function(req, res){
     xkcd.random(function(error, response) {
-        console.log(response.transcript);
         res.redirect(response.num);
     });
 });
@@ -30,24 +29,25 @@ app.get("/random", function(req, res){
 app.get("/:num", function(req, res){
    
     var id = req.params.num;
-    var max = 2535;
+
+   xkcd.latest(function(error, response) {
+        max = response.num;
     
-    if (id > max){
-        xkcd.latest(function(error, response) {
-        res.redirect(response.num);
-        });
-    }
-    else if (id == 0){
-        res.redirect('/1');
-    }
-    else{
-        xkcd.get(id, function(error, response) {
-            res.render('viewData', {
-                data: response,
-                layout: false
+        if (id >= max){
+            res.redirect('/');
+        }
+        else if (id == 0){
+            res.redirect('/1');
+        }
+        else{
+            xkcd.get(id, function(error, response) {
+                res.render('viewData', {
+                    data: response,
+                    layout: false
+                });
             });
-        });
-    }
+        }
+    });
 });
 
 app.get("/", function(req, res){
